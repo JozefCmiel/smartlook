@@ -8,17 +8,21 @@
 import styled from '@emotion/styled'
 
 
-const Container = styled.div`
-  margin-left: 12rem;
+const RowContainer = styled.div`
+  padding: 1rem;
+  display: flex;
 `
 
+interface Props {
+    children: Array<JSX.Element>
+}
 
-function Main(props: {children: JSX.Element}): JSX.Element {
+function Row({children}: Props): JSX.Element {
   return (
-    <Container>
-      {props.children}
-    </Container>
+    <RowContainer>
+      {children}
+    </RowContainer>
   );
 }
 
-export default Main;
+export default Row;

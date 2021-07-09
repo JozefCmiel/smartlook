@@ -4,4 +4,4 @@
 * Author: jcmiel                                             *
 \************************************************************/
 export { default } from './users';
-export { sagas } from './users';
+export * from './users';

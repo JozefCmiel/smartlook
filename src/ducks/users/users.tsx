@@ -9,6 +9,11 @@ import { takeLatest, call, put,  } from 'redux-saga/effects';
 import { Users } from './usersInterfaces';
 import axios from 'axios';
 import { transformIntoNormalizedVersion } from '~frontendDucks/ducksUtils';
+import { AppThunk } from '~frontendDucks/store';
+
+
+
+
 const initialState: Users = {
   users: {
       ids: [],
@@ -16,6 +21,7 @@ const initialState: Users = {
   },
   loading: false,
   error: null,
+  selectedUser: '',
 }
 
 const users = createSlice({
@@ -36,13 +42,17 @@ const users = createSlice({
         state.loading = false;
         state.error = action.payload;
     },
+    setSelectedUser(state, action:  PayloadAction<string>) {
+      state.selectedUser = action.payload;
+  },
   }
 })
 
 export const {
   getUsersRequest,
   getUsersSuccess,
-  getUsersError
+  getUsersError,
+  setSelectedUser
 } = users.actions
 export default users.reducer
 

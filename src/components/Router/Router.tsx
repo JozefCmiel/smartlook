@@ -4,7 +4,7 @@ import {
   BrowserRouter
 } from "react-router-dom";
 
-import { LeftNavBar, Main } from "~frontendComponents";
+import { LeftNavBar, Scene } from "~frontendComponents";
 import { HomePage, UsersPage } from "~pages";
 
 
@@ -15,12 +15,12 @@ function Router() {
        <BrowserRouter>
         <div>
           <LeftNavBar />
-          <Main>
+          <Scene>
             <>
               <Route exact path="/" component={HomePage}/>
               <Route path="/users" component={UsersPage}/>
             </>
-          </Main>
+          </Scene>
         </div>
       </BrowserRouter>
   );

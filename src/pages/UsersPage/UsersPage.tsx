@@ -6,9 +6,11 @@
 \************************************************************/
 import {  useEffect} from 'react';
 import { connect } from 'react-redux';
-import { css, Global } from "@emotion/react";
-import { Button } from '@material-ui/core';
-import { getUsersRequest } from '../../ducks/users/users';
+import { Row, Col } from '~frontendComponents/Generic';
+
+import { getUsersRequest } from '~frontendDucks/users';
+import { UserList, User } from './components'
+
 
 interface Props {
   getUsers: any
@@ -16,26 +18,20 @@ interface Props {
 
 
 
-function UsersPage({getUsers} : Props) {
-  useEffect(() => {
-    console.log('gettingUsers');
-    getUsers();
-  }, [])
+function UsersPage() {
   return (
+        <Row>
+          <Col>
+              <UserList />
 
-        <>
-            awat
-        </>
-
+          </Col>
+          <Col>
+              <User />
+          </Col>
+        </Row>
   );
 }
-const mapStateToProps = () => ({
 
-});
 
-const mapDispatchToProps = {
-  getUsers: getUsersRequest,
-};
 
-const UserPageMain = connect(mapStateToProps, mapDispatchToProps)(UsersPage);
-export default UserPageMain;
+export default UsersPage;

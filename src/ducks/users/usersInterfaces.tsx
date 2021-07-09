@@ -24,7 +24,7 @@ interface address {
     geo: geo
 }
 
-interface singlePost {
+interface singleUser {
     id: number
     name: string
     username: string
@@ -34,15 +34,15 @@ interface singlePost {
     website: string
     company: company
 }
-
-interface normalizedUser {
+interface normalizedUsers {
     ids: Array<string>
-    byId:{ [key: string]: singlePost}
+    byId:{ [key: string]: singleUser}
 }
-
-export interface Users {
-  users: normalizedUser
+interface Users {
+  users: normalizedUsers
   loading: boolean
   error: string | null
+  selectedUser: string
 }
 
+export type { singleUser, Users, normalizedUsers };
