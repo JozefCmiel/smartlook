@@ -5,6 +5,9 @@
 \************************************************************/
 
 import { all, call } from 'redux-saga/effects';
+import { singleUser} from './users/usersInterfaces';
+import { singlePost } from './posts/postsInterfaces';
+
 
 
 
@@ -43,7 +46,7 @@ export const transformIntoNormalizedVersion = (data: any) => {
         byId[data[index].id]= data[index]
     }
     return {
-        ids: data.map((item: any) => item.id),
+        ids: data.map((item: singlePost | singleUser) => item.id),
         byId: byId
     }
 }

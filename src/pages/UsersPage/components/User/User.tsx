@@ -4,15 +4,14 @@
 * CAUTION: This file contains SENSITIVE INFORMATION          *
 * Author: jcmiel                                             *
 \************************************************************/
-import { useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Card, Col, Row } from '~frontendComponents/Generic';
 import styled from '@emotion/styled'
-import { TextField }from '@material-ui/core';
+
 
 import { RootState } from '~frontendDucks/ducks';
 import { getUsersRequest } from '~frontendDucks/users'
-
+import {InfoField} from './components';
 const Overlay = styled.div`
   position: absolute;
   width: 100%;
@@ -21,32 +20,44 @@ const Overlay = styled.div`
   opacity: 0.4;
 
 `
+const Title = styled.div`
+  padding: 0 0.5rem;
+  border-bottom: 1px solid rgba(88, 74, 60, 0.3);
 
+`
+//TODO: Zobrazit vsechny informace, zlepsit styly
 function User() {
-  const selectedUser = useSelector((state: RootState) => state.users.users.byId[state.users.selectedUser]) || {}
-
+  const selectedUser = useSelector((state: RootState) => state.users.users.byId[state.users.selectedUser || 0]) || {}
   return (
         <Card>
-          <Row >
-            <Col>
-              {selectedUser?.id ?  <></> : <Overlay />}
-            </Col>
-            <Col>
-              <TextField value={selectedUser.name} label={"Name"}  />
-            </Col>
-            <Col>
-              <TextField value={selectedUser.email} label={"Email"} />
-            </Col>
-            <Col>
-              <TextField value={selectedUser.username} label={"Username"} />
-            </Col>
-            <Col>
-              <TextField value={selectedUser.email} />
-            </Col>
-            <Col>
-              <TextField value={selectedUser.email} />
-            </Col>
-          </Row>
+          <>
+            <Title>User </Title>
+            {selectedUser.id ?
+              <>
+                  <InfoField
+                    value={selectedUser.name}
+                    label={"Name"}
+                  />
+                  <InfoField
+                      value={selectedUser.username}
+                      label={"Username"}
+                  />
+                  <InfoField
+                      value={selectedUser.email}
+                      label={"Email"}
+                  />
+                  <InfoField
+                      value={selectedUser.phone}
+                      label={"Phone"}
+                  />
+                  <InfoField
+                      value={`${selectedUser.address.city}, ${selectedUser.address.street}`}
+                      label={"Address"}
+                    />
+              </> :
+               <Overlay />}
+
+          </>
         </Card>
   );
 }

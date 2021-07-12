@@ -35,14 +35,14 @@ interface singleUser {
     company: company
 }
 interface normalizedUsers {
-    ids: Array<string>
-    byId:{ [key: string]: singleUser}
+    ids: Array<number>
+    byId:{ [key: number]: singleUser}
 }
 interface Users {
   users: normalizedUsers
   loading: boolean
   error: string | null
-  selectedUser: string
+  selectedUser: number | null
 }
 
 export type { singleUser, Users, normalizedUsers };

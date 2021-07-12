@@ -4,7 +4,6 @@
 * CAUTION: This file contains SENSITIVE INFORMATION          *
 * Author: jcmiel                                             *
 \************************************************************/
-import {  useEffect} from 'react';
 import { connect } from 'react-redux';
 import { Row, Col } from '~frontendComponents/Generic';
 

@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { List }from '@material-ui/core';
 import { Logo} from '~frontendComponents';
 import { Drawer } from '~frontendComponents/Generic';
@@ -7,6 +7,9 @@ import {
     Link
   } from "react-router-dom";
 import styled from '@emotion/styled';
+import { useDispatch, useSelector } from 'react-redux'
+import { getPostsRequest } from '~frontendDucks/posts';
+import { getUsersRequest } from '~frontendDucks/users';
 
 
 const NavBarButton = styled(Link)`
@@ -69,7 +72,11 @@ const NavBar= styled.div`
 
 
 function LeftNavBar() {
-    //Not Sure if this is valid html
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(getPostsRequest());
+        dispatch(getUsersRequest());
+      }, [])
     return (
             <Drawer>
                 <NavBar>

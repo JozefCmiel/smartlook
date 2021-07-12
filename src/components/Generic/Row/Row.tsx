@@ -1,9 +1,10 @@
-
+/** @jsxImportSource @emotion/react */
 /************************************************************\
 * POZOR: Tento soubor obsahuje CITLIVE INFORMACE             *
 * CAUTION: This file contains SENSITIVE INFORMATION          *
 * Author: jcmiel                                             *
 \************************************************************/
+import { css } from "@emotion/react";
 
 import styled from '@emotion/styled'
 
@@ -15,11 +16,14 @@ const RowContainer = styled.div`
 
 interface Props {
     children: Array<JSX.Element>
+    column?: boolean
 }
 
-function Row({children}: Props): JSX.Element {
+function Row({children, column}: Props): JSX.Element {
   return (
-    <RowContainer>
+    <RowContainer css={css`
+          flex-direction: ${column ? 'column' : 'row'}
+          `}>
       {children}
     </RowContainer>
   );

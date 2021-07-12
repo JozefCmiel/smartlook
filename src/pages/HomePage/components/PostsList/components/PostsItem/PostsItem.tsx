@@ -6,18 +6,18 @@
 * Author: jcmiel                                             *
 \************************************************************/
 
-import { jsx, css, } from '@emotion/react'
+import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 
 
 
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '~frontendDucks/ducks';
-import { setSelectedUser } from '~frontendDucks/users';
+import { setSelectedPost } from '~frontendDucks/posts';
 
 
 
-const UserCard = styled.div`
+const PostsCard = styled.div`
     padding: 1rem 0.5rem;
     borderBottom: 1px solid rgba(88, 74, 60, 0.1);
     cursor: pointer;
@@ -35,31 +35,33 @@ interface Props {
 
 
 
-function UsersItem({ item } : Props) {
+function PostsItem({ item } : Props) {
   const dispatch = useDispatch()
 
-  const user = useSelector((state: RootState) => state.users.users.byId[item] )
-  const isSelected = useSelector((state: RootState) => state.users.selectedUser === item )
+  const post = useSelector((state: RootState) => state.posts.posts.byId[item] )
+  const authorName = useSelector((state: RootState) => state.users.users.byId[post.userId]?.name)
+
+  const isSelected = useSelector((state: RootState) => state.posts.selectedPost === item )
 
   const doSetSelectedUser = () => {
-    dispatch(setSelectedUser(item))
+    dispatch(setSelectedPost(item));
   }
 
   return (
-        <UserCard
+        <PostsCard
           onClick={doSetSelectedUser}
           css={css`
             background-color: ${isSelected ? 'rgba(78, 204, 163, 0.2)' : 'white'};
         `}
         >
           <div>
-            {user.name} ({user.username})
+            {post.title}
             { // Cover to long string with css
             }
           </div>
-          <small>{user.email}</small>
-        </UserCard>
+          <small>{authorName}</small>
+        </PostsCard>
   );
 }
 
-export default UsersItem;
+export default PostsItem;

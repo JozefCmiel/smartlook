@@ -4,21 +4,29 @@
 * CAUTION: This file contains SENSITIVE INFORMATION          *
 * Author: jcmiel                                             *
 \************************************************************/
+import { connect } from 'react-redux';
+import { Row, Col } from '~frontendComponents/Generic';
 
-import { css, Global } from "@emotion/react";
-import { Button } from '@material-ui/core';
+import { getUsersRequest } from '~frontendDucks/users';
+import { PostsList, Post } from './components'
 
 
 
 
 function HomePage() {
   return (
+        <Row>
+          <Col>
+              <PostsList />
 
-        <>
-            Home
-        </>
-
+          </Col>
+          <Col>
+              <Post />
+          </Col>
+        </Row>
   );
 }
+
+
 
 export default HomePage;

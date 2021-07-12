@@ -6,7 +6,7 @@
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { takeLatest, call, put,  } from 'redux-saga/effects';
-import { Users } from './usersInterfaces';
+import { Posts } from './postsInterfaces';
 import axios from 'axios';
 import { transformIntoNormalizedVersion } from '~frontendDucks/ducksUtils';
 import { AppThunk } from '~frontendDucks/store';
@@ -14,63 +14,62 @@ import { AppThunk } from '~frontendDucks/store';
 
 
 
-const initialState: Users = {
-  users: {
+const initialState: Posts = {
+  posts: {
       ids: [],
       byId: {}
   },
   loading: false,
   error: null,
-  selectedUser: null,
+  selectedPost: null,
 }
 
-const users = createSlice({
-  name: 'users',
+const posts = createSlice({
+  name: 'posts',
   initialState,
   reducers: {
-    getUsersRequest(state) {
-      console.log('setting')
+    getPostsRequest(state) {
       state.loading = true
       state.error = null
     },
-    getUsersSuccess(state, action:  PayloadAction<any>) {
+    getPostsSuccess(state, action:  PayloadAction<any>) {
         state.loading = false;
         state.error = null;
-        state.users = transformIntoNormalizedVersion(action.payload)
+        state.posts = transformIntoNormalizedVersion(action.payload)
     },
-    getUsersError(state, action:  PayloadAction<string>) {
+    getPostsError(state, action:  PayloadAction<string>) {
         state.loading = false;
         state.error = action.payload;
     },
-    setSelectedUser(state, action:  PayloadAction<number>) {
-      state.selectedUser = action.payload;
+    setSelectedPost(state, action:  PayloadAction<number>) {
+      state.selectedPost = action.payload;
   },
   }
 })
 
 export const {
-  getUsersRequest,
-  getUsersSuccess,
-  getUsersError,
-  setSelectedUser
-} = users.actions
-export default users.reducer
+  getPostsRequest,
+  getPostsSuccess,
+  getPostsError,
+  setSelectedPost
+} = posts.actions
+export default posts.reducer
 
 // API endpoints
-const callGetUsers = async () =>
-   axios.get('https://jsonplaceholder.typicode.com/users');
+const callGetPosts = async () =>
+   axios.get('https://jsonplaceholder.typicode.com/posts');
 
 
 // side effects
-const workerGetUsers = function* () {
+const workerGetPosts = function* () {
     try {
-        const { data } = yield call(callGetUsers);
-        yield put(getUsersSuccess(data));
+        const { data } = yield call(callGetPosts);
+        yield put(getPostsSuccess(data));
     } catch (error) {
-        yield put(getUsersError(error));
+        yield put(getPostsError(error));
     }
 };
 
 export const sagas = [
-   takeLatest(getUsersRequest, workerGetUsers)
+   takeLatest(getPostsRequest, workerGetPosts)
 ];

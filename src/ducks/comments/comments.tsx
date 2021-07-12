@@ -6,7 +6,7 @@
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { takeLatest, call, put,  } from 'redux-saga/effects';
-import { Users } from './usersInterfaces';
+import { Comments, getComments } from './commentsInterfaces';
 import axios from 'axios';
 import { transformIntoNormalizedVersion } from '~frontendDucks/ducksUtils';
 import { AppThunk } from '~frontendDucks/store';
@@ -14,63 +14,57 @@ import { AppThunk } from '~frontendDucks/store';
 
 
 
-const initialState: Users = {
-  users: {
+const initialState: Comments = {
+  comments: {
       ids: [],
       byId: {}
   },
   loading: false,
   error: null,
-  selectedUser: null,
 }
 
-const users = createSlice({
-  name: 'users',
+const comments = createSlice({
+  name: 'comments',
   initialState,
   reducers: {
-    getUsersRequest(state) {
-      console.log('setting')
+    getCommentsRequest(state, action:  PayloadAction<getComments>) {
       state.loading = true
       state.error = null
     },
-    getUsersSuccess(state, action:  PayloadAction<any>) {
+    getCommentsSuccess(state, action:  PayloadAction<any>) {
         state.loading = false;
         state.error = null;
-        state.users = transformIntoNormalizedVersion(action.payload)
+        state.comments = transformIntoNormalizedVersion(action.payload)
     },
-    getUsersError(state, action:  PayloadAction<string>) {
+    getCommentsError(state, action:  PayloadAction<string>) {
         state.loading = false;
         state.error = action.payload;
     },
-    setSelectedUser(state, action:  PayloadAction<number>) {
-      state.selectedUser = action.payload;
-  },
   }
 })
 
 export const {
-  getUsersRequest,
-  getUsersSuccess,
-  getUsersError,
-  setSelectedUser
-} = users.actions
-export default users.reducer
+  getCommentsRequest,
+  getCommentsSuccess,
+  getCommentsError,
+} = comments.actions
+export default comments.reducer
 
 // API endpoints
-const callGetUsers = async () =>
-   axios.get('https://jsonplaceholder.typicode.com/users');
+const callGetComments = async (id: number) =>
+   axios.get(`https://jsonplaceholder.typicode.com/posts/${id}/comments`);
 
 
 // side effects
-const workerGetUsers = function* () {
+const workerGetComments = function* (action: PayloadAction<getComments>) {
     try {
-        const { data } = yield call(callGetUsers);
-        yield put(getUsersSuccess(data));
+        const { data } = yield call(callGetComments, action.payload.id);
+        yield put(getCommentsSuccess(data));
     } catch (error) {
-        yield put(getUsersError(error));
+        yield put(getCommentsError(error));
     }
 };
 
 export const sagas = [
-   takeLatest(getUsersRequest, workerGetUsers)
+   takeLatest(getCommentsRequest, workerGetComments)
 ];

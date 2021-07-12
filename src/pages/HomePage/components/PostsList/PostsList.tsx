@@ -4,12 +4,12 @@
 * CAUTION: This file contains SENSITIVE INFORMATION          *
 * Author: jcmiel                                             *
 \************************************************************/
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Card } from '~frontendComponents/Generic';
 import styled from '@emotion/styled'
 
 import { RootState } from '~frontendDucks/ducks';
-import UserItem from './components/UserItem';
+import PostItem from './components/PostsItem';
 
 const Title = styled.div`
   padding: 0 0.5rem;
@@ -17,15 +17,15 @@ const Title = styled.div`
 
 `
 
-function UsersList() {
-  const list = useSelector((state: RootState) => state.users.users.ids)
+function PostsList() {
+  const list = useSelector((state: RootState) => state.posts.posts.ids)
   return (
         <Card>
           <>
-            <Title>User list </Title>
+            <Title>Posts list </Title>
 
               { list.map((item: number) =>(
-                    <UserItem
+                    <PostItem
                       key={item}
                       item={item}
                     />)
@@ -35,4 +35,4 @@ function UsersList() {
   );
 }
 
-export default UsersList;
+export default PostsList;
