@@ -4,4 +4,4 @@
 * Author: jcmiel                                             *
 \************************************************************/
 
-export { default } from './LeftNavBar'
+export { default } from './LeftNavBar';

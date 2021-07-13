@@ -6,14 +6,20 @@
 import Svg from 'react-inlinesvg';
 
 
-function SvgInliner(value: { height?: number; src: string; width?: number }): JSX.Element  {
+interface Props {
+    height?: number
+    src: string
+    width?: number
+}
+
+const SvgInliner = function({ height, src, width }: Props): JSX.Element  {
     return (
         <Svg
-            height={value.height}
-            src={value.src}
-            width={value.width}
+            height={height}
+            src={src}
+            width={width}
         />
     );
-}
+};
 
 export default SvgInliner;

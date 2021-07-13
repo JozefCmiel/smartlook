@@ -1,4 +1,3 @@
-
 /** @jsxImportSource @emotion/react */
 /************************************************************\
 * POZOR: Tento soubor obsahuje CITLIVE INFORMACE             *
@@ -7,28 +6,24 @@
 \************************************************************/
 
 import { useEffect } from 'react';
-import { css } from '@emotion/react'
-import styled from '@emotion/styled'
-
-
-
+import styled from '@emotion/styled';
 import { useDispatch, useSelector } from 'react-redux'
+;
+
 import { RootState } from '~frontendDucks/ducks';
 import { getCommentsRequest } from '~frontendDucks/comments';
 
 
-
-const PostsCard = styled.div`
+const CommentCard = styled.div`
     padding: 1rem 0.5rem;
-    borderBottom: 1px solid rgba(88, 74, 60, 0.1);
+    border-bottom: 1px solid rgba(88, 74, 60, 0.1);
     cursor: pointer;
-    borderRadius: 2px;
 
-  &:hover {
-    background: rgba(88, 74, 60, 0.1);
-
-  }
-`
+`;
+const CommentTitle = styled.h4`
+    border-bottom: 1px solid rgba(78, 204, 163, 0.2);
+    border-radius: 2px;
+`;
 interface Props {
     item: number
   }
@@ -37,40 +32,48 @@ interface PropsComments {
   item: number
 }
 
-function Comment({item}: Props) {
-    const commentById = useSelector((state: RootState) => state.comments.comments.byId[item])
+const Comment = function({ item }: Props) {
+    const commentById = useSelector((state: RootState) => state.comments.comments.byId[item]);
     return (
-            <PostsCard>
-                <div>
-                {commentById.name}
-                { // Cover to long string with css
-                }
-                </div>
-        </PostsCard>
-    )
-}
+        <CommentCard>
+            <div>
+                <CommentTitle>
+                    {commentById.name}
+                </CommentTitle>
+                <p>
+                    {commentById.body}
+                </p>
+                <p>{commentById.email}</p>
+            </div>
+        </CommentCard>
+    );
+};
+
+const Title = styled.h4`
+  padding: 0 0.5rem;
+  border-bottom: 1px solid rgba(88, 74, 60, 0.3);
+`;
 
 
+const Comments = function({ item } : PropsComments) {
+    const dispatch = useDispatch();
 
-function Comments({ item } : PropsComments) {
-  const dispatch = useDispatch()
+    const commentsIds = useSelector((state: RootState) => state.comments.comments.ids);
 
-  const commentsIds = useSelector((state: RootState) => state.comments.comments.ids)
+    useEffect(() => {
+        dispatch(getCommentsRequest({ id: item }));
+    }, [ item ]);
 
-  useEffect(() => {
-    dispatch(getCommentsRequest({ id:item }));
-  }, [item])
-
-  return (
-      <>
-    { commentsIds.map((item: number) =>(
-        <Comment
-          key={item}
-          item={item}
-        />)
-  )}
-  </>
-  );
-}
+    return (
+        <>
+            <Title>Comments</Title>
+            { commentsIds.map((item: number) => (
+                <Comment
+                    key={item}
+                    item={item}
+                />))}
+        </>
+    );
+};
 
 export default Comments;

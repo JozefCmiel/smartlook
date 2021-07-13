@@ -5,22 +5,20 @@
 \************************************************************/
 
 import { all, call } from 'redux-saga/effects';
-import { singleUser} from './users/usersInterfaces';
+
+import { singleUser } from './users/usersInterfaces';
 import { singlePost } from './posts/postsInterfaces';
 
 
-
-
-
-const workerWrapper = function* (effect: any ) { //For the sake of simplicity using any on effects,
+const workerWrapper = function* (effect: any) { //For the sake of simplicity using any on effects,
     try {
         yield all([ effect ]);
     } catch (error) {
-        console.error(error);
+        console.error(error); //eslint-disable-line
     }
 };
 
-const wrapSaga = (effect: any ) => //For the sake of simplicity using any on effects,
+const wrapSaga = (effect: any) => //For the sake of simplicity using any on effects,
     call(workerWrapper, effect);
 
 
@@ -33,7 +31,6 @@ const combineSagas = (...sagas: Array<any>) => //For the sake of simplicity usin
                 throw new TypeError(effect + ' is not a redux saga effect');
             }
         }
-        console.log(effects[0])
         yield all(effects.map(wrapSaga));
     };
 
@@ -41,12 +38,12 @@ export default combineSagas;
 
 
 export const transformIntoNormalizedVersion = (data: any) => {
-    const byId: any = {}
-    for(const index in data) {
-        byId[data[index].id]= data[index]
+    const byId: any = {};
+    for (const index in data) {
+        byId[data[index].id] = data[index];
     }
     return {
         ids: data.map((item: singlePost | singleUser) => item.id),
         byId: byId
-    }
-}
+    };
+};

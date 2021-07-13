@@ -1,4 +1,3 @@
-
 /** @jsxImportSource @emotion/react */
 /************************************************************\
 * POZOR: Tento soubor obsahuje CITLIVE INFORMACE             *
@@ -6,15 +5,13 @@
 * Author: jcmiel                                             *
 \************************************************************/
 
-import { jsx, css, } from '@emotion/react'
-import styled from '@emotion/styled'
-
-
-
+import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 import { useDispatch, useSelector } from 'react-redux'
+;
+
 import { RootState } from '~frontendDucks/ducks';
 import { setSelectedUser } from '~frontendDucks/users';
-
 
 
 const UserCard = styled.div`
@@ -27,39 +24,38 @@ const UserCard = styled.div`
     background: rgba(88, 74, 60, 0.1);
 
   }
-`
+`;
 
 interface Props {
   item: number
 }
 
 
+const UsersItem = function({ item } : Props) {
+    const dispatch = useDispatch();
 
-function UsersItem({ item } : Props) {
-  const dispatch = useDispatch()
+    const user = useSelector((state: RootState) => state.users.users.byId[item]);
+    const isSelected = useSelector((state: RootState) => state.users.selectedUser === item);
 
-  const user = useSelector((state: RootState) => state.users.users.byId[item] )
-  const isSelected = useSelector((state: RootState) => state.users.selectedUser === item )
+    const doSetSelectedUser = () => {
+        dispatch(setSelectedUser(item));
+    };
 
-  const doSetSelectedUser = () => {
-    dispatch(setSelectedUser(item))
-  }
-
-  return (
+    return (
         <UserCard
-          onClick={doSetSelectedUser}
-          css={css`
+            onClick={doSetSelectedUser}
+            css={css`
             background-color: ${isSelected ? 'rgba(78, 204, 163, 0.2)' : 'white'};
         `}
         >
-          <div>
-            {user.name} ({user.username})
-            { // Cover to long string with css
-            }
-          </div>
-          <small>{user.email}</small>
+            <div>
+                {user.name} ({user.username})
+                { // Cover to long string with css
+                }
+            </div>
+            <small>{user.email}</small>
         </UserCard>
-  );
-}
+    );
+};
 
 export default UsersItem;

@@ -1,22 +1,30 @@
-/** @jsxImportSource @emotion/react */
-import { css, Global } from "@emotion/react";
-import {  Router } from "~frontendComponents";
+/** @jsxImportSource @emotion/react */ //eslint-disable-line
+/************************************************************\
+* POZOR: Tento soubor obsahuje CITLIVE INFORMACE             *
+* CAUTION: This file contains SENSITIVE INFORMATION          *
+* Author: jcmiel                                             *
+\************************************************************/
+import { css, Global } from '@emotion/react';
 import { Provider } from 'react-redux';
+
+import {  Router } from '~frontendComponents';
 
 
 import store from './ducks/store';
 
-function App() {
-  return (
-    <Provider store={store}>
-      <Global
-        styles={css`
+
+const App = function() {
+    return (
+        <Provider store={store}>
+            <Global
+                styles={css`
           body {
             font-family: -apple-system, BlinkMacSystemFont, "avenir next",
               avenir, "helvetica neue", helvetica, Ubuntu, roboto, noto,
               "segoe ui", arial, sans-serif;
             color: #232931;
             background-color: #5F9580;
+            overflow: hidden;
           }
 
           & * {
@@ -37,10 +45,10 @@ function App() {
           }
 
         `}
-      />
-       <Router />
-    </Provider>
-  );
-}
+            />
+            <Router />
+        </Provider>
+    );
+};
 
 export default App;

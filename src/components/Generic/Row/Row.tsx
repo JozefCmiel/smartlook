@@ -4,29 +4,28 @@
 * CAUTION: This file contains SENSITIVE INFORMATION          *
 * Author: jcmiel                                             *
 \************************************************************/
-import { css } from "@emotion/react";
-
-import styled from '@emotion/styled'
+import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 
 
 const RowContainer = styled.div`
   padding: 1rem;
   display: flex;
-`
+`;
 
 interface Props {
     children: Array<JSX.Element>
     column?: boolean
 }
 
-function Row({children, column}: Props): JSX.Element {
-  return (
-    <RowContainer css={css`
+const Row = function({ children, column }: Props): JSX.Element {
+    return (
+        <RowContainer css={css`
           flex-direction: ${column ? 'column' : 'row'}
           `}>
-      {children}
-    </RowContainer>
-  );
-}
+            {children}
+        </RowContainer>
+    );
+};
 
 export default Row;

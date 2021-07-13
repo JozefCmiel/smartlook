@@ -1,11 +1,16 @@
+/************************************************************\
+* POZOR: Tento soubor obsahuje CITLIVE INFORMACE             *
+* CAUTION: This file contains SENSITIVE INFORMATION          *
+* Author: jcmiel                                             *
+\************************************************************/
 import { Link } from 'react-router-dom';
-import React, { Component } from 'react';
+import React from 'react';
 
 import LogoSvg from '~svg/logoWithHexa.svg';
 import SvgInliner from '~frontendComponents/Generic/SvgInliner';
 
 
-function Logo() {
+const Logo = function() {
     return (
         <Link to="/">
             <SvgInliner
@@ -15,6 +20,6 @@ function Logo() {
             />
         </Link>
     );
-}
+};
 
 export default Logo;

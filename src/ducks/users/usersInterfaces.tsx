@@ -4,7 +4,6 @@
 * Author: jcmiel                                             *
 \************************************************************/
 
-
 interface company {
     name: string
     catchPhrase: string

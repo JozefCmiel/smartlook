@@ -6,58 +6,59 @@
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { takeLatest, call, put,  } from 'redux-saga/effects';
-import { Posts } from './postsInterfaces';
 import axios from 'axios';
+
 import { transformIntoNormalizedVersion } from '~frontendDucks/ducksUtils';
-import { AppThunk } from '~frontendDucks/store';
 
-
+import { Posts } from './postsInterfaces';
+import { singleUser } from '../users/usersInterfaces';
 
 
 const initialState: Posts = {
-  posts: {
-      ids: [],
-      byId: {}
-  },
-  loading: false,
-  error: null,
-  selectedPost: null,
-}
+    posts: {
+        ids: [],
+        byId: {}
+    },
+    loading: false,
+    error: null,
+    selectedPost: null,
+};
 
 const posts = createSlice({
-  name: 'posts',
-  initialState,
-  reducers: {
-    getPostsRequest(state) {
-      state.loading = true
-      state.error = null
-    },
-    getPostsSuccess(state, action:  PayloadAction<any>) {
-        state.loading = false;
-        state.error = null;
-        state.posts = transformIntoNormalizedVersion(action.payload)
-    },
-    getPostsError(state, action:  PayloadAction<string>) {
-        state.loading = false;
-        state.error = action.payload;
-    },
-    setSelectedPost(state, action:  PayloadAction<number>) {
-      state.selectedPost = action.payload;
-  },
-  }
-})
+    name: 'posts',
+    initialState,
+    reducers: {
+        getPostsRequest(state) {
+            state.loading = true;
+            state.error = null;
+        },
+        getPostsSuccess(state, action:  PayloadAction<Array<singleUser>>) {
+            state.loading = false;
+            state.error = null;
+            state.posts = transformIntoNormalizedVersion(action.payload);
+            state.selectedPost = action.payload[0].id;
+        },
+        getPostsError(state, action:  PayloadAction<string>) {
+            state.loading = false;
+            state.error = action.payload;
+        },
+        setSelectedPost(state, action:  PayloadAction<number>) {
+            state.selectedPost = action.payload;
+        },
+    }
+});
 
 export const {
-  getPostsRequest,
-  getPostsSuccess,
-  getPostsError,
-  setSelectedPost
-} = posts.actions
-export default posts.reducer
+    getPostsRequest,
+    getPostsSuccess,
+    getPostsError,
+    setSelectedPost
+} = posts.actions;
+export default posts.reducer;
 
 // API endpoints
 const callGetPosts = async () =>
-   axios.get('https://jsonplaceholder.typicode.com/posts');
+    axios.get('https://jsonplaceholder.typicode.com/posts');
 
 
 // side effects
@@ -71,5 +72,5 @@ const workerGetPosts = function* () {
 };
 
 export const sagas = [
-   takeLatest(getPostsRequest, workerGetPosts)
+    takeLatest(getPostsRequest, workerGetPosts)
 ];

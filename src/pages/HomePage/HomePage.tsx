@@ -1,32 +1,26 @@
-
 /************************************************************\
 * POZOR: Tento soubor obsahuje CITLIVE INFORMACE             *
 * CAUTION: This file contains SENSITIVE INFORMATION          *
 * Author: jcmiel                                             *
 \************************************************************/
-import { connect } from 'react-redux';
+
 import { Row, Col } from '~frontendComponents/Generic';
 
-import { getUsersRequest } from '~frontendDucks/users';
-import { PostsList, Post } from './components'
+import { PostsList, Post } from './components';
 
 
-
-
-function HomePage() {
-  return (
+const HomePage = function() {
+    return (
         <Row>
-          <Col>
-              <PostsList />
-
-          </Col>
-          <Col>
-              <Post />
-          </Col>
+            <Col list>
+                <PostsList />
+            </Col>
+            <Col>
+                <Post />
+            </Col>
         </Row>
-  );
-}
-
+    );
+};
 
 
 export default HomePage;

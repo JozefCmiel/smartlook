@@ -1,13 +1,18 @@
 /** @jsxImportSource @emotion/react */
+/************************************************************\
+* POZOR: Tento soubor obsahuje CITLIVE INFORMACE             *
+* CAUTION: This file contains SENSITIVE INFORMATION          *
+* Author: jcmiel                                             *
+\************************************************************/
 import React, { useEffect } from 'react';
-import { List }from '@material-ui/core';
-import { Logo} from '~frontendComponents';
-import { Drawer } from '~frontendComponents/Generic';
 import {
     Link
-  } from "react-router-dom";
+} from 'react-router-dom';
 import styled from '@emotion/styled';
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux';
+
+import { Drawer } from '~frontendComponents/Generic';
+import { Logo } from '~frontendComponents';
 import { getPostsRequest } from '~frontendDucks/posts';
 import { getUsersRequest } from '~frontendDucks/users';
 
@@ -48,52 +53,53 @@ const NavBarButton = styled(Link)`
             color: #4ecca3;
         }
     }
-`
+`;
 
 const NavBarPosition = styled.div`
     flex: 1 1 auto;
     min-width: 0;
     margin-top: 4px;
     margin-bottom: 4px;
-`
+`;
 
-const NavBarSpan= styled.div`
+const NavBarSpan = styled.div`
     font-size: 1rem;
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
     font-weight: 400;
     line-height: 1.5;
     letter-spacing: 0.00938em;
-`
+`;
 
-const NavBar= styled.div`
+const NavBar = styled.div`
     display: flex;
     flex-direction: column;
-`
+`;
 
 
-function LeftNavBar() {
-    const dispatch = useDispatch()
+const LeftNavBar = function() {
+    const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getPostsRequest());
         dispatch(getUsersRequest());
-      }, [])
+    }, []);
     return (
-            <Drawer>
-                <NavBar>
-                    <Logo />
-                    {[{path: '/', text: 'Home'}, {path: '/users', text: 'Users'},].map(
-                        (item: {text: string; path: string}) => (
+        <Drawer>
+            <NavBar>
+                <Logo />
+                {[ { path: '/', text: 'Home' }, { path: '/users', text: 'Users' }, ].map(
+                    (item: {text: string; path: string}) => (
                         <NavBarButton to={item.path} key={item.text}>
                             <NavBarPosition>
-                            <NavBarSpan>
-                               {item.text}
-                            </NavBarSpan>
+                                <NavBarSpan>
+                                    {item.text}
+                                </NavBarSpan>
                             </NavBarPosition>
                         </NavBarButton>
-                    ))}
-                </NavBar>
-            </Drawer>
+                    )
+                )}
+            </NavBar>
+        </Drawer>
     );
-  }
+};
 
 export default LeftNavBar;
