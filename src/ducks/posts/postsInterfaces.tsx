@@ -8,7 +8,6 @@ interface singlePost {
     id: number
     userId: number
     title: string
-    email: string
     body: string
 }
 interface normalizedPosts {
