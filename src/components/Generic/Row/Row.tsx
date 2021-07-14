@@ -6,6 +6,7 @@
 \************************************************************/
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import React from 'react';
 
 
 const RowContainer = styled.div`
@@ -14,11 +15,11 @@ const RowContainer = styled.div`
 `;
 
 interface Props {
-    children: Array<JSX.Element>
+    children: React.ReactNode
     column?: boolean
 }
 
-const Row = function({ children, column }: Props): JSX.Element {
+const Row: React.FC<Props> = function({ children, column }: Props) {
     return (
         <RowContainer css={css`
           flex-direction: ${column ? 'column' : 'row'}

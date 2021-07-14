@@ -9,7 +9,7 @@ import { Row, Col } from '~frontendComponents/Generic';
 import { PostsList, Post } from './components';
 
 
-const HomePage = function() {
+const HomePage: React.FC = function() {
     return (
         <Row>
             <Col list>

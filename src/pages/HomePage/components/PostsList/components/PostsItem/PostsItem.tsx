@@ -31,7 +31,7 @@ interface Props {
 }
 
 
-const PostsItem = function({ item } : Props) {
+const PostsItem: React.FC<Props> = function({ item }) {
     const dispatch = useDispatch();
 
     const post = useSelector((state: RootState) => state.posts.posts.byId[item]);

@@ -3,7 +3,7 @@
 * CAUTION: This file contains SENSITIVE INFORMATION          *
 * Author: jcmiel                                             *
 \************************************************************/
-
+import React from 'react';
 import styled from '@emotion/styled';
 
 
@@ -21,10 +21,10 @@ const CardContainer = styled.div`
 `;
 
 interface Props {
-    children: JSX.Element
+    children: React.ReactNode
 }
 
-const Card = function({ children }: Props): JSX.Element {
+const Card: React.FC<Props> = ({ children }) => {
     return (
         <CardContainer>
             {children}

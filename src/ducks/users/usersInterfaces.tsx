@@ -44,4 +44,8 @@ interface Users {
   selectedUser: number | null
 }
 
-export type { singleUser, Users, normalizedUsers };
+interface apiGetUsers {
+    [index: number]: singleUser
+}
+
+export type { singleUser, Users, normalizedUsers, apiGetUsers };

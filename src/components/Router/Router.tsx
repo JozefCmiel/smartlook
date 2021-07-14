@@ -12,7 +12,7 @@ import { LeftNavBar, Scene } from '~frontendComponents';
 import { HomePage, UsersPage } from '~pages';
 
 
-const Router = function() {
+const Router: React.FC = function() {
     return (
         <BrowserRouter>
             <div>

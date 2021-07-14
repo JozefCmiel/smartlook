@@ -4,6 +4,7 @@
 * Author: jcmiel                                             *
 \************************************************************/
 import styled from '@emotion/styled';
+import React from 'react';
 
 
 const Container = styled.div`
@@ -27,11 +28,15 @@ const MenuContainer = styled.div`
   background-color: #393E46;
 `;
 
-const Drawer = function(props: {children: JSX.Element}): JSX.Element {
+interface Props {
+  children: React.ReactNode
+}
+
+const Drawer: React.FC<Props> = function({ children }) {
     return (
         <Container>
             <MenuContainer>
-                {props.children}
+                {children}
             </MenuContainer>
         </Container>
     );

@@ -5,7 +5,7 @@
 * Author: jcmiel                                             *
 \************************************************************/
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { useDispatch, useSelector } from 'react-redux'
 ;
@@ -24,6 +24,10 @@ const CommentTitle = styled.h4`
     border-bottom: 1px solid rgba(78, 204, 163, 0.2);
     border-radius: 2px;
 `;
+
+const CommentSAuthor = styled.span`
+    margin: 0 0.5rem;
+`;
 interface Props {
     item: number
   }
@@ -32,18 +36,33 @@ interface PropsComments {
   item: number
 }
 
-const Comment = function({ item }: Props) {
+const Comment: React.FC<Props> = function({ item }) {
+    const [ state, setState ] = useState({
+        open: false
+    }); // Just to use react hooks in this project
     const commentById = useSelector((state: RootState) => state.comments.comments.byId[item]);
+    const { open } = state;
+    const openComment = () => {
+        setState({ open: !open });
+    };
+
     return (
         <CommentCard>
             <div>
                 <CommentTitle>
                     {commentById.name}
+                    <CommentSAuthor>({commentById.email})</CommentSAuthor>
                 </CommentTitle>
-                <p>
-                    {commentById.body}
-                </p>
-                <p>{commentById.email}</p>
+
+                {open &&
+                <>
+                    <p>
+                        {commentById.body}
+                    </p>
+
+                </>
+                }
+                <div onClick={openComment}>{open ? 'Show' : 'Hide'}</div>
             </div>
         </CommentCard>
     );
@@ -55,7 +74,7 @@ const Title = styled.h4`
 `;
 
 
-const Comments = function({ item } : PropsComments) {
+const Comments: React.FC<PropsComments> = function({ item }) {
     const dispatch = useDispatch();
 
     const commentsIds = useSelector((state: RootState) => state.comments.comments.ids);

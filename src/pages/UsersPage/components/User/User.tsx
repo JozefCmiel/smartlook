@@ -30,7 +30,7 @@ const Title = styled.div`
 
 `;
 //TODO: Zobrazit vsechny informace, zlepsit styly
-const User = function() {
+const User: React.FC = function() {
     const selectedUser = useSelector((state: RootState) => state.users.users.byId[state.users.selectedUser || 0]) || {};
     return (
         <Card>

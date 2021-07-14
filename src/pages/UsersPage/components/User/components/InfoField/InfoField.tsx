@@ -17,7 +17,7 @@ interface Props {
     value: string
 }
 
-const InfoField = function({ label, value }: Props) {
+const InfoField: React.FC<Props> = function({ label, value }) {
     return (
         <TextField>
             {label}:  {value}

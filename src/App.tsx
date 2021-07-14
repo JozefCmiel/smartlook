@@ -4,16 +4,17 @@
 * CAUTION: This file contains SENSITIVE INFORMATION          *
 * Author: jcmiel                                             *
 \************************************************************/
+import React from 'react';
 import { css, Global } from '@emotion/react';
 import { Provider } from 'react-redux';
 
-import {  Router } from '~frontendComponents';
+import { Router } from '~frontendComponents';
 
 
 import store from './ducks/store';
 
 
-const App = function() {
+const App: React.FC = function() {
     return (
         <Provider store={store}>
             <Global

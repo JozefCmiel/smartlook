@@ -3,9 +3,8 @@
 * CAUTION: This file contains SENSITIVE INFORMATION          *
 * Author: jcmiel                                             *
 \************************************************************/
-
-import styled from '@emotion/styled'
-;
+import React from 'react';
+import styled from '@emotion/styled';
 
 
 const ColContainer = styled.div`
@@ -24,11 +23,11 @@ const ColContainerList = styled.div`
 
 
 interface Props {
-    children: JSX.Element
+    children: React.ReactNode
     list?: boolean
 }
 
-const Col = function({ children, list }: Props): JSX.Element {
+const Col : React.FC<Props> = function({ children, list }: Props) {
     if (list) {
         return (
             <ColContainerList >

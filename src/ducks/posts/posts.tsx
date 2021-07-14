@@ -10,8 +10,7 @@ import axios from 'axios';
 
 import { transformIntoNormalizedVersion } from '~frontendDucks/ducksUtils';
 
-import { Posts } from './postsInterfaces';
-import { singleUser } from '../users/usersInterfaces';
+import { Posts, apiGetPosts } from './postsInterfaces';
 
 
 const initialState: Posts = {
@@ -32,7 +31,7 @@ const posts = createSlice({
             state.loading = true;
             state.error = null;
         },
-        getPostsSuccess(state, action:  PayloadAction<Array<singleUser>>) {
+        getPostsSuccess(state, action:  PayloadAction<apiGetPosts>) {
             state.loading = false;
             state.error = null;
             state.posts = transformIntoNormalizedVersion(action.payload);
@@ -58,7 +57,7 @@ export default posts.reducer;
 
 // API endpoints
 const callGetPosts = async () =>
-    axios.get('https://jsonplaceholder.typicode.com/posts');
+    axios.get('https://jsonplaceholder.typicode.com/posts'); // Optimalization, get few posts at a time, get more if user is scrolling
 
 
 // side effects

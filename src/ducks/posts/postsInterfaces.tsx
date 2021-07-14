@@ -22,4 +22,8 @@ interface Posts {
   selectedPost: number | null
 }
 
-export type { singlePost, Posts, normalizedPosts };
+interface apiGetPosts {
+  [index: number]: singlePost
+}
+
+export type { singlePost, Posts, normalizedPosts, apiGetPosts };

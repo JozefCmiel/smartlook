@@ -10,7 +10,7 @@ import { Row, Col } from '~frontendComponents/Generic';
 import { UserList, User } from './components';
 
 
-const UsersPage = function() {
+const UsersPage: React.FC = function() {
     return (
         <Row>
             <Col list>

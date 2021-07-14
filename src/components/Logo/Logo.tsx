@@ -10,7 +10,7 @@ import LogoSvg from '~svg/logoWithHexa.svg';
 import SvgInliner from '~frontendComponents/Generic/SvgInliner';
 
 
-const Logo = function() {
+const Logo: React.FC = function() {
     return (
         <Link to="/">
             <SvgInliner

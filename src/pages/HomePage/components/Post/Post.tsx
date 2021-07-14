@@ -40,7 +40,7 @@ const Title = styled.h3`
   border-bottom: 1px solid rgba(88, 74, 60, 0.3);
 `;
 
-const Post = function() {
+const Post: React.FC = function() {
     const dispatch = useDispatch();
     const selectedPost = useSelector((state: RootState) => state.posts.posts.byId[state.posts.selectedPost || 0]) || {};
     const authorName = useSelector((state: RootState) => state.users.users.byId[selectedPost.userId]?.name);

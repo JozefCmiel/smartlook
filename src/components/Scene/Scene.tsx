@@ -3,7 +3,7 @@
 * CAUTION: This file contains SENSITIVE INFORMATION          *
 * Author: jcmiel                                             *
 \************************************************************/
-
+import React from 'react';
 import styled from '@emotion/styled';
 
 
@@ -17,7 +17,7 @@ interface Props {
 }
 
 
-const Main = function({ children } : Props): JSX.Element {
+const Scene: React.FC<Props> = function({ children } : Props): JSX.Element {
     return (
         <Container>
             {children}
@@ -25,4 +25,4 @@ const Main = function({ children } : Props): JSX.Element {
     );
 };
 
-export default Main;
+export default Scene;

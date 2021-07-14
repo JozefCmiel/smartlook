@@ -26,4 +26,8 @@ interface Comments {
   error: string | null
 }
 
-export type { singleComment, normalizedComments, Comments, getComments };
+interface apiGetComments {
+  payload: Array<singleComment>
+}
+
+export type { singleComment, normalizedComments, Comments, getComments, apiGetComments };

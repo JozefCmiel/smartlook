@@ -4,6 +4,7 @@
 * Author: jcmiel                                             *
 \************************************************************/
 import Svg from 'react-inlinesvg';
+import React from 'react';
 
 
 interface Props {
@@ -12,7 +13,7 @@ interface Props {
     width?: number
 }
 
-const SvgInliner = function({ height, src, width }: Props): JSX.Element  {
+const SvgInliner: React.FC<Props> = function({ height, src, width }: Props) {
     return (
         <Svg
             height={height}

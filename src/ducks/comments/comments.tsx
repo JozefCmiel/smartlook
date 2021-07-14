@@ -10,7 +10,7 @@ import axios from 'axios';
 
 import { transformIntoNormalizedVersion } from '~frontendDucks/ducksUtils';
 
-import { Comments, getComments } from './commentsInterfaces';
+import { Comments, getComments, apiGetComments } from './commentsInterfaces';
 
 
 const initialState: Comments = {
@@ -30,7 +30,7 @@ const comments = createSlice({
             state.loading = !!action.payload; //just so the action is used
             state.error = null;
         },
-        getCommentsSuccess(state, action:  PayloadAction<any>) {
+        getCommentsSuccess(state, action:  PayloadAction<apiGetComments>) {
             state.loading = false;
             state.error = null;
             state.comments = transformIntoNormalizedVersion(action.payload);

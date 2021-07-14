@@ -10,7 +10,7 @@ import axios from 'axios';
 
 import { transformIntoNormalizedVersion } from '~frontendDucks/ducksUtils';
 
-import { Users } from './usersInterfaces';
+import { Users, apiGetUsers } from './usersInterfaces';
 
 
 const initialState: Users = {
@@ -31,7 +31,7 @@ const users = createSlice({
             state.loading = true;
             state.error = null;
         },
-        getUsersSuccess(state, action:  PayloadAction<any>) {
+        getUsersSuccess(state, action:  PayloadAction<apiGetUsers>) {
             state.loading = false;
             state.error = null;
             state.users = transformIntoNormalizedVersion(action.payload);

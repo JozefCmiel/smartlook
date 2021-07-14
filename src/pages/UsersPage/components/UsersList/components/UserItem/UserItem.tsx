@@ -7,8 +7,7 @@
 
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { useDispatch, useSelector } from 'react-redux'
-;
+import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '~frontendDucks/ducks';
 import { setSelectedUser } from '~frontendDucks/users';
@@ -31,7 +30,7 @@ interface Props {
 }
 
 
-const UsersItem = function({ item } : Props) {
+const UsersItem: React.FC<Props> = function({ item }) {
     const dispatch = useDispatch();
 
     const user = useSelector((state: RootState) => state.users.users.byId[item]);

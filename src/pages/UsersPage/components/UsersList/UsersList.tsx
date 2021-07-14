@@ -19,7 +19,7 @@ const Title = styled.div`
 
 `;
 
-const UsersList = function() {
+const UsersList: React.FC = function() {
     const list = useSelector((state: RootState) => state.users.users.ids);
     return (
         <Card>

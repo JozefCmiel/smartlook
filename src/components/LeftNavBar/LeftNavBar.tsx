@@ -73,10 +73,11 @@ const NavBarSpan = styled.div`
 const NavBar = styled.div`
     display: flex;
     flex-direction: column;
+    padding: 0 1rem;
 `;
 
 
-const LeftNavBar = function() {
+const LeftNavBar: React.FC = function() {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getPostsRequest());
